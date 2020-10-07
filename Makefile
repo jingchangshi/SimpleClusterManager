@@ -1,12 +1,12 @@
 CC=gcc
-FLAGS=-g -O0
+FLAGS=-O2 -std=c99 -lpthread
 
 all: server client
 	make server
 	make client
 server: server.c
-	${CC} -o server server.c ${FLAGS}
+	${CC} ${FLAGS} -o server server.c 
 client: client.c
-	${CC} -o client client.c ${FLAGS}
+	${CC} ${FLAGS} -o client client.c
 clean:
 	rm server client
