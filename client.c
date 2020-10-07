@@ -6,24 +6,6 @@
 #include <sys/socket.h>
 #include <netinet/in.h>
 
-float getCPUUsage() {
-  long double a[4], b[4];
-  float loadavg;
-  FILE *fp;
-
-  fp = fopen("/proc/stat","r");
-  fscanf(fp,"%*s %Lf %Lf %Lf %Lf",&a[0],&a[1],&a[2],&a[3]);
-  fclose(fp);
-  sleep(1);
-
-  fp = fopen("/proc/stat","r");
-  fscanf(fp,"%*s %Lf %Lf %Lf %Lf",&b[0],&b[1],&b[2],&b[3]);
-  fclose(fp);
-
-  loadavg = ((b[0]+b[1]+b[2]) - (a[0]+a[1]+a[2])) / ((b[0]+b[1]+b[2]+b[3]) - (a[0]+a[1]+a[2]+a[3]));
-  return loadavg;
-}
-
 int main(int argc , char *argv[])
 {
 
@@ -41,7 +23,7 @@ int main(int argc , char *argv[])
     info.sin_family = PF_INET;
 
     /* info.sin_addr.s_addr = inet_addr("127.0.0.1"); */
-    info.sin_addr.s_addr = inet_addr("192.168.1.100");
+    info.sin_addr.s_addr = inet_addr("192.168.1.105");
     info.sin_port = htons(8700);
     int err;
     err = connect(sockfd,(struct sockaddr *)&info,sizeof(info));
@@ -49,19 +31,21 @@ int main(int argc , char *argv[])
         printf("Connection error");
     }
 
-    float cpu_load;
-    cpu_load = getCPUUsage();
+    /* while(1) { */
+    /* } */
 
-    char hostname[64];
-    gethostname(hostname, 64);
     //Send a message to server
-    char message[128];
-    err=sprintf(message, "%s: CPU usage = %.2f%%", hostname, cpu_load*100);
     char receiveMessage[128] = {};
-    send(sockfd,message,sizeof(message),0);
-    recv(sockfd,receiveMessage,sizeof(receiveMessage),0);
+    int op_flag = -1;
 
-    printf("%s",receiveMessage);
+    op_flag = 1;
+    send(sockfd,&op_flag,sizeof(op_flag),0);
+    printf("send: %d\n",op_flag);
+    /* recv(sockfd,&err,sizeof(err),0); */
+    /* printf("recv: %d\n",err); */
+    recv(sockfd,receiveMessage,sizeof(receiveMessage),0);
+    printf("%s\n",receiveMessage);
+
     printf("close Socket\n");
     close(sockfd);
     return 0;
