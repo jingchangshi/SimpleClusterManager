@@ -1,12 +1,12 @@
 CC=gcc
 FLAGS=-O2 -std=c99 -lpthread
 
-all: server client
-	make server
-	make client
-server: server.c
-	${CC} ${FLAGS} -o server server.c 
-client: client.c
-	${CC} ${FLAGS} -o client client.c
+all: SCM_Server SCM_Client
+	make SCM_Server
+	make SCM_Client
+SCM_Server: SCM_Server.c
+	${CC} ${FLAGS} -o SCM_Server SCM_Server.c 
+SCM_Client: SCM_Client.c
+	${CC} ${FLAGS} -o SCM_Client SCM_Client.c
 clean:
-	rm server client
+	rm SCM_Server SCM_Client

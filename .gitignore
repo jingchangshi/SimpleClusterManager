@@ -1,3 +1,3 @@
-server
-client
+SCM_Server
+SCM_Client
 *.pid

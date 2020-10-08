@@ -1,2 +1,2 @@
 cd /home/jcshi/SimpleClusterManager
-nohup ./server > /dev/null 2>&1 & echo $! > $(hostname).pid
+nohup ./SCM_Server > /dev/null 2>&1 & echo $! > $(hostname).pid
