@@ -24,6 +24,10 @@ void* collectInfo1Node(int* sockfd) {
 int main(int argc , char *argv[])
 {
 
+  printf("Simple Cluster Manager (SCM) shows CPU loading of compute nodes.\n");
+  printf("SCM is implemented by Jingchang Shi.\n");
+  printf("Go to https://github.com/desperadoshi/SimpleClusterManager/issues for issues.\n");
+
   int n_socket = 8;
   // create socket
   int sockfd[n_socket];
@@ -85,11 +89,18 @@ int main(int argc , char *argv[])
       exit (1);
     }
   }
-  pthread_exit(NULL);
 
-  printf("close Socket\n");
-  close(sockfd);
-  return 0;
+  printf("=== Explanations begin ===\n");
+  printf("CPU usage is in [0, 100%%]\n");
+  printf("If CPU usage is about 85%% on a node,\n");
+  printf("that node is probably running all its 40 CPU cores.\n");
+  printf("If CPU usage is less than 1%% on a node,\n");
+  printf("that node is probably not occupied by nobody.\n");
+  printf("=== Explanations end   ===\n");
+  pthread_exit(NULL);
+  /* printf("close Socket\n"); */
+  /* close(sockfd); */
+  /* return 0; */
 }
 
 
