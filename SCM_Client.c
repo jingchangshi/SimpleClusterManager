@@ -95,7 +95,7 @@ int main(int argc , char *argv[])
   printf("If CPU usage is about 85%% on a node,\n");
   printf("that node is probably running all its 40 CPU cores.\n");
   printf("If CPU usage is less than 1%% on a node,\n");
-  printf("that node is probably not occupied by nobody.\n");
+  printf("that node is probably occupied by nobody.\n");
   printf("=== Explanations end   ===\n");
   pthread_exit(NULL);
   /* printf("close Socket\n"); */
