@@ -14,6 +14,8 @@ float getCPUUsage() {
   fp = fopen("/proc/stat","r");
   fscanf(fp,"%*s %Lf %Lf %Lf %Lf",&a[0],&a[1],&a[2],&a[3]);
   fclose(fp);
+  /* sleep interval 0.1s would cause inaccurate result accidently */
+  // sleep(0.1);
   sleep(1);
 
   fp = fopen("/proc/stat","r");

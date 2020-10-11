@@ -9,7 +9,7 @@ SCM currently supports the following features
 
 - Deploy the server on all the compute nodes and start the client on the master node
 - Run the client on the master node to print the CPU loading of all compute nodes in the terminal
-- Use pthread to send/receive sockets to/from all the compute nodes to reduce the communication time. 8 nodes cost about 1 second.
+- Use pthread to send/receive sockets to/from all the compute nodes to reduce the communication time. 8 nodes cost almost no additional time. 1 second is spent on calculating the CPU usage by reading `/proc/stat` 2 times. The interval between 2 reading operations is 1 second. Maybe a better way of calculating the CPU loading could be done.
 
 TODO for SCM
 
