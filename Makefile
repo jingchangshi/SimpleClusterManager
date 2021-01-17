@@ -1,5 +1,6 @@
 CC=gcc
 FLAGS=-O2 -std=c99 -lpthread
+# FLAGS=-O0 -g -std=c99 -lpthread
 
 all: SCM_Server SCM_Client
 	make SCM_Server
