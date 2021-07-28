@@ -36,7 +36,7 @@ int main(int argc , char *argv[]) {
   printf("SCM is implemented by Jingchang Shi.\n");
   printf("Go to https://github.com/desperadoshi/SimpleClusterManager/issues for issues.\n");
   printf(BRIGHTYELLOW);
-  printf("It is possible that due to the bad network, you have to wait for max 2 seconds of timeout.\n");
+  printf("It is possible that due to the slow network, you have to wait for max 2 seconds of timeout.\n");
   printf(RESET);
 
   int n_socket = 8;
