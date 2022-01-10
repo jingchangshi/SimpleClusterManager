@@ -1,0 +1,44 @@
+max_nt=4
+printf "| Node No.\t|\tCPU usage\t|\tUsers"
+for i in $(seq $max_nt); do
+  printf "\t"
+done
+printf "|\n"
+#
+for i in 2 3 4 5 6 7 8; do
+# for i in 2; do
+  raw_info=$(ssh node${i} "ps -eo pcpu,pid,user,args | sed '1d' | sort -k1 -r -n | sed -n '2,41p' | awk '{print \$1}' | paste -sd+ - | bc; ps -eo pcpu,pid,user,args | sed '1d' | sort -k1 -r -n | sed -n '2,41p' | awk '{print \$3}' | sort -u")
+  # echo "$raw_info"
+  printf "| node${i}\t\t|\t"
+  cnt=0
+  nt=0
+  for item in ${raw_info}; do 
+    cnt=$((cnt+1))
+    if (( cnt > 1 )); then
+      if [ $item = "gdm" ] || [ $item = "root" ]; then
+        # printf "\t" $item
+        continue
+      else
+        if (( ${#item} >= 8 )); then
+          printf "%s " $item
+        else
+          printf "%s\t" $item
+        fi
+        nt=$((nt+1))
+      fi
+    else
+      printf "%s\t\t|\t" $item
+    fi
+  done
+  res_nt=$((max_nt-nt))
+  # printf "%d" $res_nt
+  if (( cnt > 1 )); then
+    for i in $(seq $res_nt); do
+      printf "\t"
+    done
+    printf "|\n"
+  else
+    printf "\n"
+  fi
+done
+
