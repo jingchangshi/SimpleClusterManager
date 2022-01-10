@@ -13,6 +13,30 @@ SCM currently supports the following features
 - Run the client on the master node to print the CPU loading of all compute nodes in the terminal
 - Use pthread to send/receive sockets to/from all the compute nodes to reduce the communication time. 8 nodes cost almost no additional time. 1 second is spent on calculating the CPU usage by reading `/proc/stat` 2 times. The interval between 2 reading operations is 1 second. Maybe a better way of calculating the CPU loading could be done.
 
+The output is as follows,
+
+```
+Simple Cluster Manager (SCM) shows CPU loading of compute nodes.
+SCM is implemented by Jingchang Shi.
+Go to https://github.com/desperadoshi/SimpleClusterManager/issues for issues.
+It is possible that due to the slow network, you have to wait for max 2 seconds of timeout.
+=== Explanations begin ===
+CPU usage is in [0, 100%]
+If CPU usage is about 85% on a node,
+that node is probably running all its 40 CPU cores.
+If CPU usage is less than 1% on a node,
+that node is probably occupied by nobody.
+=== Explanations end   ===
+node1: Not connected!
+node7: CPU usage = 100.00%
+node5: CPU usage = 100.00%
+node6: CPU usage = 100.00%
+node2: CPU usage = 0.05%
+node3: CPU usage = 0.07%
+node4: CPU usage = 0.10%
+node8: CPU usage = 0.07%
+```
+
 TODO for SCM
 
 - Parse a configuration file instead of hard coding the configuration
